@@ -55,7 +55,7 @@
       <div class="tgme_body_wrap">
         <div class="tgme_page">
           <div class="tgme_page_photo">
-  <a href="tg://join?invite=D8kGgjAWI943NzIy" onclick="fbq('track', 'Lead')"><img class="tgme_page_photo_image" src="./tg_files/avatar.jpg"></a>
+  <a href="tg://join?invite=D8kGgjAWI943NzIy" onclick="fbq('track', 'Lead');ktConversion('lead')"><img class="tgme_page_photo_image" src="./tg_files/avatar.jpg"></a>
 </div>
 <div class="tgme_page_title" dir="auto">
   <span dir="auto">Koi Pay | P2P Processing</span>
@@ -84,10 +84,10 @@
   </div>
 </div>
 <div class="tgme_page_action">
-  <a class="tgme_action_button_new shine" href="tg://join?invite=D8kGgjAWI943NzIy" onclick="fbq('track', 'Lead')">Open Telegram</a>
+  <a class="tgme_action_button_new shine" href="tg://join?invite=D8kGgjAWI943NzIy" onclick="fbq('track', 'Lead');ktConversion('lead')">Open Telegram</a>
 </div>
 <!-- WEBOGRAM_BTN -->
-<div class="tgme_page_context_link_wrap"><a class="tgme_page_context_link" href="tg://join?invite=D8kGgjAWI943NzIy" onclick="fbq('track', 'Lead')">Preview channel</a></div>
+<div class="tgme_page_context_link_wrap"><a class="tgme_page_context_link" href="tg://join?invite=D8kGgjAWI943NzIy" onclick="fbq('track', 'Lead');ktConversion('lead')">Preview channel</a></div>
 <div class="tgme_page_additional">
   If you have <strong>Telegram</strong>, you can view and join <br><strong>TEST TG Preland</strong> right away.
 </div>
@@ -116,6 +116,26 @@
        src="https://www.facebook.com/tr?id=1534505238146351&ev=PageView&noscript=1"/>
 </noscript>
 <!-- End Facebook Pixel Code -->
+<!-- Keitaro subid tracking -->
+<script>
+// 1) Ловим subid из URL при заходе и запоминаем
+(function () {
+  try {
+    var sid = new URLSearchParams(location.search).get('subid');
+    if (sid) localStorage.setItem('kt_subid', sid);
+  } catch (e) {}
+})();
+// 2) Вызвать в момент конверсии (напр. на сабмите формы квиза)
+function ktConversion(status) {
+  var sid = new URLSearchParams(location.search).get('subid')
+            || localStorage.getItem('kt_subid');
+  if (!sid) return;
+  new Image().src = 'https://track.koi.plus/a7fc8f1/postback?subid='
+                    + encodeURIComponent(sid)
+                    + '&status=' + (status || 'lead');
+}
+</script>
+<!-- End Keitaro subid tracking -->
 
     <script src="./tg_files/tgwallpaper.min.js"></script>
 
